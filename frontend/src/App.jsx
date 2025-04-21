@@ -1,3 +1,4 @@
+import LoadingSpinner from "./components/LoadingSpinner";
 import FloatingShape from "./components/FloatingShape";
 import { Routes, Route, Navigate } from "react-router-dom";
 import SignUpPage from "./Pages/SignUpPage";
@@ -33,13 +34,11 @@ const RedirectAuthentecatedUser = ({ children }) => {
 };
 export default function App() {
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
-
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  console.log("isauthenticated", isAuthenticated);
-  console.log("user", user);
+  if (isCheckingAuth) return <LoadingSpinner />;
   return (
     <div
       className="min-h-screen bg-gradient-to-br
